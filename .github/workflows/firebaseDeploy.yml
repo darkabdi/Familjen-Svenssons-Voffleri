@@ -3,8 +3,6 @@ name: Firebase CI
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main]
 
 jobs:
   build:
@@ -16,12 +14,12 @@ jobs:
         node-version: [16.x,18.x, 20.x]
   
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install -g npm@9.8.1
+    - run: npm install  npm@latest
     - name: npm install, build
       run: npm run build
  
@@ -32,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
